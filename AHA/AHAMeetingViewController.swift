@@ -183,6 +183,10 @@ class AHAMeetingViewController: UIViewController, UITableViewDelegate, UITableVi
         imageView0.image = image0;
         imageView1.image = image1;
         imageView2.image = image2;
+        imageView3.image = image3;
+        imageView4.image = image4;
+        imageView5.image = image5;
+        imageView6.image = image6;
 
         imageView2.alpha = 0.0
         imageView3.alpha = 0.0
@@ -192,7 +196,7 @@ class AHAMeetingViewController: UIViewController, UITableViewDelegate, UITableVi
 
         imageView1.transform = CGAffineTransformScale(imageView1.transform, 0.1, 0.1)
 
-        UIView.animateKeyframesWithDuration(1.5, delay: 0.1, options: .CalculationModeLinear,
+        UIView.animateKeyframesWithDuration(2.5, delay: 0.1, options: .CalculationModeLinear,
             animations: { () -> Void in
                 UIView.addKeyframeWithRelativeStartTime(0, relativeDuration: 1/7, animations: {
                     imageView0.alpha = 0.0
@@ -211,21 +215,21 @@ class AHAMeetingViewController: UIViewController, UITableViewDelegate, UITableVi
                 UIView.addKeyframeWithRelativeStartTime(0, relativeDuration: 1/7, animations: {
                     imageView3.alpha = 0.0
                     imageView4.alpha = 1.0
-                    imageView1.alpha = 0.85
+                    imageView1.alpha = 0.9
 
                     imageView1.transform = CGAffineTransformScale(imageView1.transform, 2.0, 2.0)
                 })
                 UIView.addKeyframeWithRelativeStartTime(0, relativeDuration: 1/7, animations: {
                     imageView4.alpha = 0.0
                     imageView5.alpha = 1.0
-                    imageView1.alpha = 0.75
+                    imageView1.alpha = 0.85
 
                     imageView1.transform = CGAffineTransformScale(imageView1.transform, 2.0, 2.0)
                 })
                 UIView.addKeyframeWithRelativeStartTime(0, relativeDuration: 1/7, animations: {
                     imageView5.alpha = 0.0
                     imageView6.alpha = 1.0
-                    imageView1.alpha = 0.65
+                    imageView1.alpha = 0.80
 
                     imageView1.transform = CGAffineTransformScale(imageView1.transform, 2.0, 2.0)
 
