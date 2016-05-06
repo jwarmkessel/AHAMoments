@@ -13,6 +13,7 @@
 		7BB91DA91CDC297000B9EF08 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7BB91DA81CDC297000B9EF08 /* Assets.xcassets */; };
 		7BB91DAC1CDC297000B9EF08 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7BB91DAA1CDC297000B9EF08 /* LaunchScreen.storyboard */; };
 		7BB91DB41CDC36AF00B9EF08 /* AHARecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB91DB31CDC36AF00B9EF08 /* AHARecorder.swift */; };
+		7BB91DB61CDC3B8D00B9EF08 /* AHAMeetingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB91DB51CDC3B8D00B9EF08 /* AHAMeetingModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		7BB91DAB1CDC297000B9EF08 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7BB91DAD1CDC297000B9EF08 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7BB91DB31CDC36AF00B9EF08 /* AHARecorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHARecorder.swift; sourceTree = "<group>"; };
+		7BB91DB51CDC3B8D00B9EF08 /* AHAMeetingModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHAMeetingModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +65,7 @@
 				7BB91DAA1CDC297000B9EF08 /* LaunchScreen.storyboard */,
 				7BB91DAD1CDC297000B9EF08 /* Info.plist */,
 				7BB91DB31CDC36AF00B9EF08 /* AHARecorder.swift */,
+				7BB91DB51CDC3B8D00B9EF08 /* AHAMeetingModel.swift */,
 			);
 			path = AHA;
 			sourceTree = "<group>";
@@ -138,6 +141,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7BB91DB61CDC3B8D00B9EF08 /* AHAMeetingModel.swift in Sources */,
 				7BB91DA41CDC297000B9EF08 /* AHAMeetingViewController.swift in Sources */,
 				7BB91DB41CDC36AF00B9EF08 /* AHARecorder.swift in Sources */,
 				7BB91DA21CDC297000B9EF08 /* AppDelegate.swift in Sources */,
