@@ -114,7 +114,7 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="1" green="0.43360290779999999" blue="0.28658579420000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.10980392160000001" green="0.12549019610000001" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="sru-vP-z5K" firstAttribute="top" secondItem="Cwm-lh-A3R" secondAttribute="top" constant="7" id="2um-Xu-nYs"/>
                                     <constraint firstItem="sru-vP-z5K" firstAttribute="leading" secondItem="Cwm-lh-A3R" secondAttribute="leading" constant="5" id="E8J-xP-eTp"/>
@@ -204,7 +204,7 @@
                                         </constraints>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" red="1" green="0.43360290779999999" blue="0.28658579420000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="yf7-Fe-8Bz" firstAttribute="leading" secondItem="1IF-O5-LM2" secondAttribute="leading" id="45d-Sc-zDN"/>
                                     <constraint firstAttribute="trailing" secondItem="yf7-Fe-8Bz" secondAttribute="trailing" id="61H-E4-xg2"/>
@@ -249,7 +249,7 @@
                 </tapGestureRecognizer>
                 <tapGestureRecognizer id="bQL-gk-Pbo" userLabel="1 Tap Gesture Recognizer">
                     <connections>
-                        <action selector="snippetCaptureHandler:" destination="BYZ-38-t0r" id="tBg-Ao-dkX"/>
+                        <action selector="snippetCaptureHandler:" destination="BYZ-38-t0r" id="X54-ia-8aV"/>
                     </connections>
                 </tapGestureRecognizer>
                 <tapGestureRecognizer numberOfTapsRequired="2" numberOfTouchesRequired="3" id="1mK-gq-0XN" userLabel="2-3 Tap Gesture Recognizer">

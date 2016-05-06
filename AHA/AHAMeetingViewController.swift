@@ -92,11 +92,11 @@ class AHAMeetingViewController: UIViewController, UITableViewDelegate, UITableVi
 
         }
 
-        let animationDuration : NSTimeInterval = 0.5
+        let animationDuration : NSTimeInterval = 1.0
 
         animationView?.animationImages = animations
         animationView?.animationDuration = animationDuration
-        animationView?.animationRepeatCount = 3;
+        animationView?.animationRepeatCount = 1;
 
         menuButton.imageView?.startAnimating()
 
@@ -126,11 +126,150 @@ class AHAMeetingViewController: UIViewController, UITableViewDelegate, UITableVi
         
         menuButton.imageView?.startAnimating()
     }
-    
-    @IBAction func snippetCaptureHandler(sender: AnyObject) {
+
+    @IBAction func snippetCaptureHandler(sender: UITapGestureRecognizer) {
         print("snippet Cature Tap")
 
         meetingModel.snippetCapture(nowTime)
+
+        let locationInView = sender.locationInView(recordingView)
+
+        doTouchAnimation(locationInView, inView: recordingView)
+    }
+
+    func doTouchAnimation(locationInView: CGPoint, inView view: UIView) {
+
+        let image0 = UIImage.init(named: "touch-bg-1")
+        let image1 = UIImage.init(named: "Touch-Target-1")
+        let image2 = UIImage.init(named: "Touch-Target-2")
+        let image3 = UIImage.init(named: "Touch-Target-3")
+        let image4 = UIImage.init(named: "Touch-Target-4")
+        let image5 = UIImage.init(named: "Touch-Target-5")
+        let image6 = UIImage.init(named: "Touch-Target-6")
+
+        let rect0 = CGRect.init(origin: locationInView, size: (image0?.size)!)
+        let rect1 = CGRect.init(origin: locationInView, size: (image1?.size)!)
+        let rect2 = CGRect.init(origin: locationInView, size: (image2?.size)!)
+        let rect3 = CGRect.init(origin: locationInView, size: (image3?.size)!)
+        let rect4 = CGRect.init(origin: locationInView, size: (image4?.size)!)
+        let rect5 = CGRect.init(origin: locationInView, size: (image5?.size)!)
+        let rect6 = CGRect.init(origin: locationInView, size: (image6?.size)!)
+
+        let imageView0 = UIImageView.init(frame: rect0)
+        let imageView1 = UIImageView.init(frame: rect1)
+        let imageView2 = UIImageView.init(frame: rect2)
+        let imageView3 = UIImageView.init(frame: rect3)
+        let imageView4 = UIImageView.init(frame: rect4)
+        let imageView5 = UIImageView.init(frame: rect5)
+        let imageView6 = UIImageView.init(frame: rect6)
+
+
+        imageView0.center = locationInView
+        imageView1.center = locationInView
+        imageView2.center = locationInView
+        imageView3.center = locationInView
+        imageView4.center = locationInView
+        imageView5.center = locationInView
+        imageView6.center = locationInView
+
+        view.addSubview(imageView0)
+        view.addSubview(imageView1)
+        view.addSubview(imageView2)
+        view.addSubview(imageView3)
+        view.addSubview(imageView4)
+        view.addSubview(imageView5)
+        view.addSubview(imageView6)
+
+        imageView0.image = image0;
+        imageView1.image = image1;
+        imageView2.image = image2;
+
+        imageView2.alpha = 0.0
+        imageView3.alpha = 0.0
+        imageView4.alpha = 0.0
+        imageView5.alpha = 0.0
+        imageView6.alpha = 0.0
+
+        imageView1.transform = CGAffineTransformScale(imageView1.transform, 0.1, 0.1)
+
+        UIView.animateKeyframesWithDuration(1.5, delay: 0.1, options: .CalculationModeLinear,
+            animations: { () -> Void in
+                UIView.addKeyframeWithRelativeStartTime(0, relativeDuration: 1/7, animations: {
+                    imageView0.alpha = 0.0
+                    imageView2.alpha = 1.0
+
+                    //imageView1.transform = CGAffineTransformScale(imageView1.transform, 1.25, 1.25)
+                })
+
+                UIView.addKeyframeWithRelativeStartTime(0, relativeDuration: 1/7, animations: {
+                    imageView2.alpha = 0.0
+                    imageView3.alpha = 1.0
+                    imageView1.alpha = 0.95
+
+                    imageView1.transform = CGAffineTransformScale(imageView1.transform, 2.0, 2.0)
+                })
+                UIView.addKeyframeWithRelativeStartTime(0, relativeDuration: 1/7, animations: {
+                    imageView3.alpha = 0.0
+                    imageView4.alpha = 1.0
+                    imageView1.alpha = 0.85
+
+                    imageView1.transform = CGAffineTransformScale(imageView1.transform, 2.0, 2.0)
+                })
+                UIView.addKeyframeWithRelativeStartTime(0, relativeDuration: 1/7, animations: {
+                    imageView4.alpha = 0.0
+                    imageView5.alpha = 1.0
+                    imageView1.alpha = 0.75
+
+                    imageView1.transform = CGAffineTransformScale(imageView1.transform, 2.0, 2.0)
+                })
+                UIView.addKeyframeWithRelativeStartTime(0, relativeDuration: 1/7, animations: {
+                    imageView5.alpha = 0.0
+                    imageView6.alpha = 1.0
+                    imageView1.alpha = 0.65
+
+                    imageView1.transform = CGAffineTransformScale(imageView1.transform, 2.0, 2.0)
+
+                })
+                UIView.addKeyframeWithRelativeStartTime(0, relativeDuration: 1/7, animations: {
+                    imageView6.alpha = 0.0
+                    imageView1.alpha = 0.0
+                })
+
+            }) { finished in
+                imageView0.removeFromSuperview()
+                imageView1.removeFromSuperview()
+                imageView2.removeFromSuperview()
+                imageView3.removeFromSuperview()
+                imageView4.removeFromSuperview()
+                imageView5.removeFromSuperview()
+                imageView6.removeFromSuperview()
+        }
+
+    }
+
+    func doTouchAnimationX(locationInView: CGPoint, inView view: UIView) {
+        //let image = UIImage.init(named: "Touch-icon-lg")
+
+        let image = UIImage.init(named: "Touch-Target-1")
+
+
+        let rect = CGRect.init(origin: locationInView, size: (image?.size)!)
+        let imageView = UIImageView.init(frame: rect)
+        imageView.center = locationInView
+
+        imageView.image = image;
+
+        view.addSubview(imageView)
+
+//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (Int64)(1 * NSEC_PER_SEC)), dispatch_get_main_queue()) { () -> Void in
+//            imageView.removeFromSuperview()
+//        }
+
+        UIView.animateWithDuration(0.7, animations: { () -> Void in
+            imageView.alpha = 0.0
+            }, completion: { (finished: Bool) in
+                imageView.removeFromSuperview()
+        })
     }
 
     @IBAction func TapStopHandler(sender: AnyObject) {
@@ -142,7 +281,60 @@ class AHAMeetingViewController: UIViewController, UITableViewDelegate, UITableVi
         self.toggleListView()
         self.tableView.reloadData()
     }
-    
+
+    func doBarsToXAnimation() {
+        let animationView = menuButton.imageView
+
+        var animations = [UIImage]()
+        var pngName : String
+
+        for i in 0 ... 30 {
+
+            pngName = "C_\(i)"
+            animations.append(UIImage.init(named: pngName)!)
+
+        }
+
+        let animationDuration : NSTimeInterval = 0.75
+        animationView?.animationImages = animations
+        animationView?.animationDuration = animationDuration
+        animationView?.animationRepeatCount = 1;
+
+        menuButton.imageView?.startAnimating()
+
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (Int64)(1 * NSEC_PER_SEC)), dispatch_get_main_queue()) { () -> Void in
+            animations.removeAll()
+            self.menuButton.imageView?.image = UIImage.init(named: "C_31")
+        }
+    }
+
+    func doXToBarsAnimation() {
+        let animationView = menuButton.imageView
+
+        var animations = [UIImage]()
+        var pngName : String
+
+        for i in (0 ... 30).reverse() {
+
+            pngName = "C_\(i)"
+            animations.append(UIImage.init(named: pngName)!)
+
+        }
+
+        let animationDuration : NSTimeInterval = 1.0
+
+        animationView?.animationImages = animations
+        animationView?.animationDuration = animationDuration
+        animationView?.animationRepeatCount = 1;
+
+        menuButton.imageView?.startAnimating()
+
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (Int64)(1 * NSEC_PER_SEC)), dispatch_get_main_queue()) { () -> Void in
+            animations.removeAll()
+            self.menuButton.imageView?.image = UIImage.init(named: "C_0")
+        }
+    }
+
     @IBOutlet weak var nameOfMeetingButton: UIButton! {
         didSet{
             nameOfMeetingButton.contentHorizontalAlignment = .Left
@@ -184,12 +376,16 @@ class AHAMeetingViewController: UIViewController, UITableViewDelegate, UITableVi
             self.navigationController?.navigationBarHidden = false
             tableHeight = self.doubleTapView.frame.size.height
             self.listIsActive = true
+
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (Int64)(1 * NSEC_PER_SEC)), dispatch_get_main_queue()) { () -> Void in
+                self.doBarsToXAnimation()
+            }
         }
-        
+
         UIView.animateWithDuration(0.4) { () -> Void in
             
             self.tableViewHeightConstraint.constant = tableHeight
-            
+
             self.view.layoutIfNeeded()
         }
     }
