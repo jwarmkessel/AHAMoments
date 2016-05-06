@@ -13,6 +13,7 @@ class AHAMeetingViewController: UIViewController, UITableViewDelegate, UITableVi
 
     let meetingModel : AHAMeetingModel = AHAMeetingModel()
     var listIsActive : Bool = false
+
     @IBOutlet weak var tableView: UITableView!
     
     //Used to animate the height of the tableView.
@@ -33,18 +34,30 @@ class AHAMeetingViewController: UIViewController, UITableViewDelegate, UITableVi
     @IBOutlet weak var menuButton: UIButton!
     @IBOutlet weak var doubleTapView: UIView!
     @IBOutlet weak var recordingView: UIView!
-    @IBOutlet weak var doubleTapToPlayLabel: UILabel!
+    @IBOutlet weak var doubleTapToPlayLabel: UILabel! {
+        didSet {
+            self.doubleTapToPlayLabel.alpha = 0.0;
+        }
+
+    }
+
+    // MARK: - Actions
 
     @IBAction func stopRecording(sender: AnyObject) {
         print("stop")
 
         meetingModel.stopMeeting(nowTime)
-
-
         timerStop(self)
 
         self.view.bringSubviewToFront(self.doubleTapView)
         self.doubleTapView.userInteractionEnabled = true;
+
+        UIView.animateWithDuration(0.8) { () -> Void in
+
+            self.displayTimeLabel.alpha = 0.2;
+
+            self.view.layoutIfNeeded()
+        }
     }
 
     @IBAction func tapHandler(sender: AnyObject) {
@@ -111,6 +124,7 @@ class AHAMeetingViewController: UIViewController, UITableViewDelegate, UITableVi
             
             self.navigationController?.navigationBarHidden = true
             self.listIsActive = false
+            AudioServicesDisposeSystemSoundID(mySound)
         }
         else
         {
@@ -210,6 +224,18 @@ class AHAMeetingViewController: UIViewController, UITableViewDelegate, UITableVi
         
         self.navigationController?.navigationBarHidden = true
     }
+
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+
+        UIView.animateWithDuration(1.0) { () -> Void in
+
+            self.doubleTapToPlayLabel.alpha = 1.0;
+
+            self.view.layoutIfNeeded()
+        }
+
+    }
     
     //MARK: UITableViewDelegate
     
@@ -234,7 +260,18 @@ class AHAMeetingViewController: UIViewController, UITableViewDelegate, UITableVi
         cell.timeLabel!.text = timeText as String
 
         //cell.delegate = self
-        
+
+
+        if (indexPath.row == 0) {
+            cell.ornamentationImageViewTop.hidden = false
+        }
+        else if (indexPath.row == meetingModel.snippetTimes.count - 1) {
+            cell.ornamentationImageViewBottom.hidden = false
+        }
+        else {
+            cell.ornamentationImageView.hidden = false
+        }
+
         return cell
     }
     
@@ -255,6 +292,7 @@ class AHAMeetingViewController: UIViewController, UITableViewDelegate, UITableVi
 
 // MARK: - Helpers
 
+
     func convertToText(timestamp : NSTimeInterval) -> NSString {
         let ti = NSInteger(timestamp)
 
@@ -268,14 +306,18 @@ class AHAMeetingViewController: UIViewController, UITableViewDelegate, UITableVi
         return NSString(format: "%0.2d:%0.2d:%0.2d",hours,minutes,seconds)
     }
 
+    var mySound: SystemSoundID = 0
+
     func playSnippet(soundFile: String) {
+
+        AudioServicesDisposeSystemSoundID(mySound)
 
         let soundURL = NSURL.init(fileURLWithPath: soundFile)
 
-            var mySound: SystemSoundID = 0
-            AudioServicesCreateSystemSoundID(soundURL, &mySound)
-            // Play
-            AudioServicesPlaySystemSound(mySound);
+        AudioServicesCreateSystemSoundID(soundURL, &mySound)
+        // Play
+        AudioServicesPlaySystemSound(mySound);
+
     }
 }
 

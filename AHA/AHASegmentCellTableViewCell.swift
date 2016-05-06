@@ -18,6 +18,8 @@ class AHASegmentCellTableViewCell: UITableViewCell {
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var snippetLabel: UILabel!
     @IBOutlet weak var ornamentationImageView: UIImageView!
+    @IBOutlet weak var ornamentationImageViewTop: UIImageView!
+    @IBOutlet weak var ornamentationImageViewBottom: UIImageView!
 
     var delegate : AHASegmentCellDelegate?
 
@@ -26,17 +28,17 @@ class AHASegmentCellTableViewCell: UITableViewCell {
         // Initialization code
     }
 
-//    override func setSelected(selected: Bool, animated: Bool) {
-//        super.setSelected(selected, animated: animated)
-//
-//        // Configure the view for the selected state
-//    }
-
     @IBAction func playButtonHandler(sender: AnyObject) {
         print("play")
 
         if let delegate = delegate {
             delegate.didTapCell(self)
         }
+    }
+
+    override func prepareForReuse() {
+        ornamentationImageView.hidden = true
+        ornamentationImageViewTop.hidden = true
+        ornamentationImageViewBottom.hidden = true
     }
 }
