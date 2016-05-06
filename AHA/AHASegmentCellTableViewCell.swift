@@ -8,21 +8,35 @@
 
 import UIKit
 
+protocol AHASegmentCellDelegate {
+    func didTapCell(cell: AHASegmentCellTableViewCell)
+}
+
 class AHASegmentCellTableViewCell: UITableViewCell {
 
     @IBOutlet weak var numberLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var snippetLabel: UILabel!
     @IBOutlet weak var ornamentationImageView: UIImageView!
+
+    var delegate : AHASegmentCellDelegate?
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
+//    override func setSelected(selected: Bool, animated: Bool) {
+//        super.setSelected(selected, animated: animated)
+//
+//        // Configure the view for the selected state
+//    }
 
-        // Configure the view for the selected state
+    @IBAction func playButtonHandler(sender: AnyObject) {
+        print("play")
+
+        if let delegate = delegate {
+            delegate.didTapCell(self)
+        }
     }
-    
 }

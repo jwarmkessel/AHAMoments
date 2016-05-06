@@ -18,6 +18,7 @@ import UIKit
 let kSnippetText = "text"
 let kSnippetDuration = "duration"
 let kSnippetTimeStamp = "timestamp"
+let kSnippetSoundFile = "soundFile"
 
 class AHAMeetingModel: NSObject {
     
@@ -46,7 +47,7 @@ class AHAMeetingModel: NSObject {
 
     func snippetCapture(nowTime: NSNumber) {
 
-        let text = ""
+        let text = "Notes"
 
         let currentTime = NSDate.timeIntervalSinceReferenceDate()
 
@@ -63,21 +64,38 @@ class AHAMeetingModel: NSObject {
         for (index, element) in snippetTimes.enumerate() {
             print("Item \(index): \(element)")
             
-            let blob : [String:AnyObject] = snippetTimes[index] as! [String : AnyObject]
+            var blob : [String:AnyObject] = snippetTimes[index] as! [String : AnyObject]
             
             let duration : NSNumber = blob[kSnippetDuration] as! NSNumber
             let endTime = Int64(duration.integerValue)
             let startTime = Int64(duration.integerValue - 10)
-            
+
+            var soundFile : String
+
             if (startTime >= 0) {
-                self.recorder.trim(startTime, end: endTime)
+                soundFile = self.recorder.trim(startTime, end: endTime)
             }
             else
             {
-                self.recorder.trim(0, end: endTime)
+                soundFile = self.recorder.trim(0, end: endTime)
             }
+
+            blob[kSnippetSoundFile] = soundFile;
+
+            snippetTimes[index] = blob
         }
     }
+
+    func findSnippets() {
+        let snippetURL = recorder.createSnippetsDirectory()
+        do {
+            let fileList = try NSFileManager.defaultManager().contentsOfDirectoryAtPath(snippetURL.path!)
+            print(fileList)
+        }catch let error as NSError {
+            print(error.localizedDescription)
+        }
+    }
+
 
 // MARK: File Handling
 

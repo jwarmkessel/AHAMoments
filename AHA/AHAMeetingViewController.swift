@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AudioToolbox
 
 class AHAMeetingViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
@@ -66,6 +67,11 @@ class AHAMeetingViewController: UIViewController, UITableViewDelegate, UITableVi
         meetingModel.snippetCapture(nowTime)
     }
 
+    @IBAction func TapStopHandler(sender: AnyObject) {
+        self.menuButton.alpha = 1.0;
+        stopRecording(self)
+    }
+
     @IBAction func menuButtonHandler(sender: AnyObject, forEvent event: UIEvent) {
         self.toggleListView()
         self.tableView.reloadData()
@@ -82,6 +88,18 @@ class AHAMeetingViewController: UIViewController, UITableViewDelegate, UITableVi
             exportAllButton.contentHorizontalAlignment = .Right
         }
     }
+
+
+    @IBAction func exportAllButtonHandler(sender: AnyObject) {
+        displayShareSheet("AHA Moment")
+    }
+
+
+    func displayShareSheet(shareContent:String) {
+        let activityViewController = UIActivityViewController(activityItems: [shareContent as NSString], applicationActivities: nil)
+        presentViewController(activityViewController, animated: true, completion: {})
+    }
+    
     func toggleListView() {
         
         
@@ -135,7 +153,8 @@ class AHAMeetingViewController: UIViewController, UITableViewDelegate, UITableVi
 
     func timerStart(sender: AnyObject) {
         if (!timer.valid) {
-            let aSelector : Selector = #selector(AHAMeetingViewController.updateTime)
+           // let aSelector : Selector = #selector(AHAMeetingViewController.updateTime)
+            let aSelector : Selector = "updateTime"
             timer = NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: aSelector, userInfo: nil, repeats: true)
             startTime = NSDate.timeIntervalSinceReferenceDate()
         }
@@ -191,17 +210,12 @@ class AHAMeetingViewController: UIViewController, UITableViewDelegate, UITableVi
         
         self.navigationController?.navigationBarHidden = true
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
     //MARK: UITableViewDelegate
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return 20
+        return meetingModel.snippetTimes.count
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -213,17 +227,64 @@ class AHAMeetingViewController: UIViewController, UITableViewDelegate, UITableVi
         let cell : AHASegmentCellTableViewCell = (tableView.dequeueReusableCellWithIdentifier("segmentCell", forIndexPath: indexPath) as? AHASegmentCellTableViewCell)!
         
         cell.numberLabel.text =  String(indexPath.row + 1)
+
+        cell.snippetLabel!.text = meetingModel.snippetTimes[indexPath.row][kSnippetText] as! String
+
+        let timeText = convertToText(meetingModel.snippetTimes[indexPath.row][kSnippetTimeStamp] as! NSTimeInterval)
+        cell.timeLabel!.text = timeText as String
+
+        //cell.delegate = self
         
         return cell
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
+
+        let soundFile = meetingModel.snippetTimes[indexPath.row][kSnippetSoundFile] as! String
+
+        print("didSelectRowAtIndexPath row:\(indexPath.row) :: soundFile = \(soundFile)")
+
+        playSnippet(soundFile)
     }
-    
+
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
     {
         return 100.0;//Choose your custom row height
     }
+
+
+// MARK: - Helpers
+
+    func convertToText(timestamp : NSTimeInterval) -> NSString {
+        let ti = NSInteger(timestamp)
+
+        //var ms = Int((timestamp % 1) * 1000)
+
+        let seconds = ti % 60
+        let minutes = (ti / 60) % 60
+        let hours = (ti / 3600) % 24 - 7 // Hack the time zone... since this is GMT
+
+        //return NSString(format: "%0.2d:%0.2d:%0.2d.%0.3d",hours,minutes,seconds,ms)
+        return NSString(format: "%0.2d:%0.2d:%0.2d",hours,minutes,seconds)
+    }
+
+    func playSnippet(soundFile: String) {
+
+        let soundURL = NSURL.init(fileURLWithPath: soundFile)
+
+            var mySound: SystemSoundID = 0
+            AudioServicesCreateSystemSoundID(soundURL, &mySound)
+            // Play
+            AudioServicesPlaySystemSound(mySound);
+    }
 }
+
+//extension AHAMeetingViewController : AHASegmentCellDelegate {
+
+//    func didTapCell(cell: AHASegmentCellTableViewCell) {
+//        let indexPath = tableView.indexPathForCell(cell)
+//        tableView(tableView, cellForRowAtIndexPath: indexPath!)
+//        tableView(tableView, didSelectRowAtIndexPath: indexPath!)
+//    }
+//}
 

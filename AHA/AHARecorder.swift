@@ -76,15 +76,21 @@ class AHARecorder: NSObject, AVAudioRecorderDelegate {
 
     }
 
-    func trim(start : Int64, end  : Int64) {
+    func trim(start : Int64, end  : Int64) -> String {
+
+        var soundFile : String = ""
+
         self.createSnippetsDir()
         
         let url = NSURL.fileURLWithPath(self.directoryName! as String)
     
         if let asset : AVURLAsset? = AVURLAsset(URL: url)
         {
-            exportAsset(asset!, start: start, end: end)
+            soundFile = exportAsset(asset!, start: start, end: end)
         }
+
+        return soundFile
+
     }
     
     func createSnippetsDir() {
@@ -123,7 +129,7 @@ class AHARecorder: NSObject, AVAudioRecorderDelegate {
         return dataPath
     }
     
-    func exportAsset(asset : AVURLAsset, start : Int64, end  : Int64) {
+    func exportAsset(asset : AVURLAsset, start : Int64, end  : Int64) -> String {
         let dataPath = self.createSnippetsDirectory()
         
         let name = NSUUID().UUIDString.stringByAppendingString(".m4a")
@@ -144,7 +150,7 @@ class AHARecorder: NSObject, AVAudioRecorderDelegate {
             let duration = CMTimeGetSeconds(asset.duration)
             if (duration < 5.0) {
                 print("sound is not long enough")
-                return
+                return ""
             }
 //             e.g. the first 5 seconds
             let startTime = CMTimeMake(start, 1)
@@ -165,5 +171,7 @@ class AHARecorder: NSObject, AVAudioRecorderDelegate {
                 }
             })
         }
+
+        return trimmedSoundFileURL.path!
     }
 }
