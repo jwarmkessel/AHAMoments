@@ -128,6 +128,7 @@ class AHAMeetingViewController: UIViewController {
 
         //Find the difference between current time and start time.
         var elapsedTime: NSTimeInterval = currentTime - startTime
+        let timeNow: NSTimeInterval = currentTime - startTime
 
         //calculate the minutes in elapsed time.
         let minutes = UInt8(elapsedTime / 60.0)
@@ -150,8 +151,9 @@ class AHAMeetingViewController: UIViewController {
         //displayTimeLabel.text = "\(strMinutes):\(strSeconds):\(strFraction)"
         displayTimeLabel.text = "\(strMinutes):\(strSeconds)"
 
+        let uTime = Int64(timeNow)
         // Keep this to send to model
-        nowTime = NSNumber(double: elapsedTime)
+        nowTime = NSNumber(longLong: uTime)
     }
 
     override func viewDidLoad() {

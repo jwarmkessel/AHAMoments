@@ -43,6 +43,8 @@ class AHAMeetingModel: NSObject {
     func snippetCapture(nowTime: NSNumber) {
 
         snippetTimes.append(nowTime)
+
+        print(snippetTimes)
     }
 
     func stopMeeting(nowTime: NSNumber) {
