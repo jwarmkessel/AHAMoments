@@ -59,6 +59,24 @@ class AHAMeetingModel: NSObject {
 
     func stopMeeting(nowTime: NSNumber) {
         recorder.finishRecording(success: true)
+        
+        for (index, element) in snippetTimes.enumerate() {
+            print("Item \(index): \(element)")
+            
+            let blob : [String:AnyObject] = snippetTimes[index] as! [String : AnyObject]
+            
+            let duration : NSNumber = blob[kSnippetDuration] as! NSNumber
+            let endTime = Int64(duration.integerValue)
+            let startTime = Int64(duration.integerValue - 10)
+            
+            if (startTime >= 0) {
+                self.recorder.trim(startTime, end: endTime)
+            }
+            else
+            {
+                self.recorder.trim(0, end: endTime)
+            }
+        }
     }
 
 // MARK: File Handling

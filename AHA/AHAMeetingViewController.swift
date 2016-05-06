@@ -32,6 +32,7 @@ class AHAMeetingViewController: UIViewController {
 
         meetingModel.stopMeeting(nowTime)
 
+
         timerStop(self)
 
         self.view.bringSubviewToFront(self.doubleTapView)
