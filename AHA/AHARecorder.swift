@@ -58,43 +58,43 @@ class AHARecorder: NSObject, AVAudioRecorderDelegate {
         }
     }
     
-    func startRecording() {
-        let documentDirectory : String = getDocumentsDirectory()
-        let audioFilename = documentDirectory.stringByAppendingPathComponent("recording.m4a")
-        let audioURL = NSURL(fileURLWithPath: audioFilename)
-        
-        let settings = [
-            AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
-            AVSampleRateKey: 12000.0,
-            AVNumberOfChannelsKey: 1 as NSNumber,
-            AVEncoderAudioQualityKey: AVAudioQuality.High.rawValue
-        ]
-        
-        do {
-            audioRecorder = try AVAudioRecorder(URL: audioURL, settings: settings)
-            audioRecorder.delegate = self
-            audioRecorder.record()
-            
-        } catch {
-            finishRecording(success: false)
-        }
-    }
-    
-    func getDocumentsDirectory() -> String {
-        let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)
-        let documentsDirectory = paths[0]
-        return documentsDirectory
-    }
-    
-    func finishRecording(success success: Bool) {
-        audioRecorder.stop()
-        audioRecorder = nil
-        
-        if success {
-            recordButton.setTitle("Tap to Re-record", forState: .Normal)
-        } else {
-            recordButton.setTitle("Tap to Record", forState: .Normal)
-            // recording failed :(
-        }
-    }
+//    func startRecording() {
+//        let documentDirectory : String = getDocumentsDirectory()
+//        let audioFilename = documentDirectory.stringByAppendingPathComponent("recording.m4a")
+//        let audioURL = NSURL(fileURLWithPath: audioFilename)
+//        
+//        let settings = [
+//            AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
+//            AVSampleRateKey: 12000.0,
+//            AVNumberOfChannelsKey: 1 as NSNumber,
+//            AVEncoderAudioQualityKey: AVAudioQuality.High.rawValue
+//        ]
+//        
+//        do {
+//            audioRecorder = try AVAudioRecorder(URL: audioURL, settings: settings)
+//            audioRecorder.delegate = self
+//            audioRecorder.record()
+//            
+//        } catch {
+//            finishRecording(success: false)
+//        }
+//    }
+//    
+//    func getDocumentsDirectory() -> String {
+//        let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)
+//        let documentsDirectory = paths[0]
+//        return documentsDirectory
+//    }
+//    
+//    func finishRecording(success success: Bool) {
+//        audioRecorder.stop()
+//        audioRecorder = nil
+//        
+//        if success {
+//            recordButton.setTitle("Tap to Re-record", forState: .Normal)
+//        } else {
+//            recordButton.setTitle("Tap to Record", forState: .Normal)
+//            // recording failed :(
+//        }
+//    }
 }
