@@ -11,8 +11,9 @@ import UIKit
 class AHAMeetingViewController: UIViewController {
 
     let meetingModel : AHAMeetingModel = AHAMeetingModel()
-
+    var listIsActive : Bool = false
     @IBOutlet weak var tableView: UITableView!
+    
     //Used to animate the height of the tableView.
     @IBOutlet weak var tableViewHeightConstraint: NSLayoutConstraint!
     
@@ -22,10 +23,16 @@ class AHAMeetingViewController: UIViewController {
             self.tableViewBottomLayoutConstraint.active = false
         }
     }
-    
+    @IBOutlet var displayTimeLabel: UILabel!
+    {
+        didSet{
+            displayTimeLabel.alpha = 0.0;
+        }
+    }
     @IBOutlet weak var menuButton: UIButton!
     @IBOutlet weak var doubleTapView: UIView!
     @IBOutlet weak var recordingView: UIView!
+    @IBOutlet weak var doubleTapToPlayLabel: UILabel!
 
     @IBAction func stopRecording(sender: AnyObject) {
         print("stop")
@@ -42,7 +49,9 @@ class AHAMeetingViewController: UIViewController {
     @IBAction func tapHandler(sender: AnyObject) {
         
         print("doubleTap")
-
+        self.doubleTapToPlayLabel.alpha = 0.0;
+        self.menuButton.alpha = 0.0;
+        self.displayTimeLabel.alpha = 1.0;
         self.doubleTapView.userInteractionEnabled = false;
         self.view.bringSubviewToFront(self.recordingView)
     
@@ -58,27 +67,29 @@ class AHAMeetingViewController: UIViewController {
     }
 
     @IBAction func menuButtonHandler(sender: AnyObject, forEvent event: UIEvent) {
-        //TODO FIXME://Animate tableview not working expected manner.
-        //self.toggleListView()
+        self.toggleListView()
     }
     
     func toggleListView() {
-        self.tableViewHeightConstraint.active = false
         
-        if (self.tableViewBottomLayoutConstraint == nil)
-        {
-            let verticalConstraint = NSLayoutConstraint(item: self.tableView, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: self.view, attribute: NSLayoutAttribute.CenterY, multiplier: 1, constant: 0)
+        
+        self.tableViewHeightConstraint.active = true
+        
+        var tableHeight : CGFloat = 0.0
+        
+        if(self.listIsActive) {
             
-            self.tableView.addConstraint(verticalConstraint)
+            self.listIsActive = false
         }
         else
         {
-            self.tableViewBottomLayoutConstraint.active = true
-            self.tableViewBottomLayoutConstraint.constant = 0
+            tableHeight = self.doubleTapView.frame.size.height
+            self.listIsActive = true
         }
         
         UIView.animateWithDuration(0.4) { () -> Void in
             
+            self.tableViewHeightConstraint.constant = tableHeight
             
             self.view.layoutIfNeeded()
         }
@@ -91,7 +102,7 @@ class AHAMeetingViewController: UIViewController {
         if (motion == .MotionShake)
         {
             print("shake")
-
+            self.menuButton.alpha = 1.0;
             stopRecording(self)
         
         }
@@ -101,18 +112,14 @@ class AHAMeetingViewController: UIViewController {
         return true
     }
 
-
     // MARK: Timer
-
-    @IBOutlet var displayTimeLabel: UILabel!
-
     var startTime = NSTimeInterval()
 
     var timer:NSTimer = NSTimer()
 
     var nowTime = NSNumber()
 
-    @IBAction func timerStart(sender: AnyObject) {
+    func timerStart(sender: AnyObject) {
         if (!timer.valid) {
             let aSelector : Selector = "updateTime"
             timer = NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: aSelector, userInfo: nil, repeats: true)
@@ -120,7 +127,7 @@ class AHAMeetingViewController: UIViewController {
         }
     }
 
-    @IBAction func timerStop(sender: AnyObject) {
+    func timerStop(sender: AnyObject) {
         timer.invalidate()
     }
 

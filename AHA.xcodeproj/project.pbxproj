@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7B8371251CDC97F200089545 /* AHASegmentCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8371231CDC97F200089545 /* AHASegmentCellTableViewCell.swift */; };
+		7B8371261CDC97F200089545 /* AHASegmentCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B8371241CDC97F200089545 /* AHASegmentCellTableViewCell.xib */; };
 		7BB91DA21CDC297000B9EF08 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB91DA11CDC297000B9EF08 /* AppDelegate.swift */; };
 		7BB91DA41CDC297000B9EF08 /* AHAMeetingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB91DA31CDC297000B9EF08 /* AHAMeetingViewController.swift */; };
 		7BB91DA71CDC297000B9EF08 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7BB91DA51CDC297000B9EF08 /* Main.storyboard */; };
@@ -17,6 +19,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7B8371231CDC97F200089545 /* AHASegmentCellTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHASegmentCellTableViewCell.swift; sourceTree = "<group>"; };
+		7B8371241CDC97F200089545 /* AHASegmentCellTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AHASegmentCellTableViewCell.xib; sourceTree = "<group>"; };
 		7BB91D9E1CDC297000B9EF08 /* AHA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AHA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7BB91DA11CDC297000B9EF08 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7BB91DA31CDC297000B9EF08 /* AHAMeetingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AHAMeetingViewController.swift; sourceTree = "<group>"; };
@@ -66,6 +70,8 @@
 				7BB91DAD1CDC297000B9EF08 /* Info.plist */,
 				7BB91DB31CDC36AF00B9EF08 /* AHARecorder.swift */,
 				7BB91DB51CDC3B8D00B9EF08 /* AHAMeetingModel.swift */,
+				7B8371231CDC97F200089545 /* AHASegmentCellTableViewCell.swift */,
+				7B8371241CDC97F200089545 /* AHASegmentCellTableViewCell.xib */,
 			);
 			path = AHA;
 			sourceTree = "<group>";
@@ -128,6 +134,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B8371261CDC97F200089545 /* AHASegmentCellTableViewCell.xib in Resources */,
 				7BB91DAC1CDC297000B9EF08 /* LaunchScreen.storyboard in Resources */,
 				7BB91DA91CDC297000B9EF08 /* Assets.xcassets in Resources */,
 				7BB91DA71CDC297000B9EF08 /* Main.storyboard in Resources */,
@@ -143,6 +150,7 @@
 			files = (
 				7BB91DB61CDC3B8D00B9EF08 /* AHAMeetingModel.swift in Sources */,
 				7BB91DA41CDC297000B9EF08 /* AHAMeetingViewController.swift in Sources */,
+				7B8371251CDC97F200089545 /* AHASegmentCellTableViewCell.swift in Sources */,
 				7BB91DB41CDC36AF00B9EF08 /* AHARecorder.swift in Sources */,
 				7BB91DA21CDC297000B9EF08 /* AppDelegate.swift in Sources */,
 			);
@@ -292,6 +300,7 @@
 				7BB91DB21CDC297000B9EF08 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
