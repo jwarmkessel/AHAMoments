@@ -20,8 +20,24 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S5Y-wd-Zky">
                                 <rect key="frame" x="20" y="76" width="560" height="524"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12:34" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gmT-gd-j4B">
+                                        <rect key="frame" x="211" y="252" width="127" height="37"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="127" id="j5Y-Wa-1Zw"/>
+                                            <constraint firstAttribute="height" constant="37" id="xkE-kn-3Tg"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="37"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
                                 <color key="backgroundColor" red="0.098039215690000001" green="0.4431372549" blue="0.3411764706" alpha="1" colorSpace="calibratedRGB"/>
                                 <gestureRecognizers/>
+                                <constraints>
+                                    <constraint firstItem="gmT-gd-j4B" firstAttribute="centerY" secondItem="S5Y-wd-Zky" secondAttribute="centerY" constant="8.5" id="b7G-rk-NB7"/>
+                                    <constraint firstItem="gmT-gd-j4B" firstAttribute="centerX" secondItem="S5Y-wd-Zky" secondAttribute="centerX" constant="-5.5" id="pt1-Qq-sXC"/>
+                                </constraints>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="Qtk-US-2Ao" appends="YES" id="0Zp-mg-Ywf"/>
                                 </connections>
@@ -85,6 +101,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="displayTimeLabel" destination="gmT-gd-j4B" id="D3k-VB-fQJ"/>
                         <outlet property="doubleTapView" destination="8oQ-2E-xQH" id="mAl-mE-WM2"/>
                         <outlet property="menuButton" destination="DAI-MU-PdV" id="cGl-Wz-1VO"/>
                         <outlet property="recordingView" destination="S5Y-wd-Zky" id="b5I-1V-AwG"/>

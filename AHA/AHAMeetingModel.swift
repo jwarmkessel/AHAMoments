@@ -8,28 +8,43 @@
 
 import UIKit
 
+// func: Create Model > Create AHA Recorder Object
+// subfunc: Create meetings directory
+// subfunc: Create uniqueID directory for this meeting
+// Start recording
+// Model Send a uniqueID (folder) to recorder to store recordings
+// Track taps - snippetTap
+
 class AHAMeetingModel: NSObject {
     
     let recorder : AHARecorder = AHARecorder()
 
-    // func: Create Model > Create AHA Recorder Object
-    // subfunc: Create meetings directory
-    // subfunc: Create uniqueID directory for this meeting
-    // Start recording
-    // Model Send a uniqueID (folder) to recorder to store recordings
-    // Track taps - snippetTap
+    var path : String?
+
+    var uniqueID : String?
+
+    //var meetings = [String]()
 
     func startMeeting() {
 
-        let path = createMeetingsDirectory()
+        path = createMeetingsDirectory()
 
-        let uniqueID = createMeeting(path)
+        uniqueID = createMeeting(path!)
 
-        recorder.requestAudioRecordingPermission(uniqueID)
+        //meetings.append(uniqueID)
 
-        recorder.startRecording(uniqueID);
-        
+        if let uniqueID = uniqueID {
+            recorder.requestAudioRecordingPermission(uniqueID)
+        }
     }
+
+    func snippetCapture() {
+
+        
+
+    }
+
+// MARK: File Handling
 
     func createMeetingsDirectory() -> String {
 
