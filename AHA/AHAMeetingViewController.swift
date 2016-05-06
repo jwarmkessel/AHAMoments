@@ -71,6 +71,17 @@ class AHAMeetingViewController: UIViewController, UITableViewDelegate, UITableVi
         self.tableView.reloadData()
     }
     
+    @IBOutlet weak var nameOfMeetingButton: UIButton! {
+        didSet{
+            nameOfMeetingButton.contentHorizontalAlignment = .Left
+        }
+    }
+    
+    @IBOutlet weak var exportAllButton: UIButton!{
+        didSet{
+            exportAllButton.contentHorizontalAlignment = .Right
+        }
+    }
     func toggleListView() {
         
         
@@ -80,10 +91,12 @@ class AHAMeetingViewController: UIViewController, UITableViewDelegate, UITableVi
         
         if(self.listIsActive) {
             
+            self.navigationController?.navigationBarHidden = true
             self.listIsActive = false
         }
         else
         {
+            self.navigationController?.navigationBarHidden = false
             tableHeight = self.doubleTapView.frame.size.height
             self.listIsActive = true
         }
@@ -122,7 +135,7 @@ class AHAMeetingViewController: UIViewController, UITableViewDelegate, UITableVi
 
     func timerStart(sender: AnyObject) {
         if (!timer.valid) {
-            let aSelector : Selector = "updateTime"
+            let aSelector : Selector = #selector(AHAMeetingViewController.updateTime)
             timer = NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: aSelector, userInfo: nil, repeats: true)
             startTime = NSDate.timeIntervalSinceReferenceDate()
         }
@@ -169,8 +182,14 @@ class AHAMeetingViewController: UIViewController, UITableViewDelegate, UITableVi
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         self.tableView.delegate = self
-        self.tableView.registerClass(AHASegmentCellTableViewCell.self, forCellReuseIdentifier: "cell")
+        
+        self.navigationController!.navigationBar.titleTextAttributes = NSDictionary(object: UIColor.whiteColor(), forKey: NSForegroundColorAttributeName) as! [String : AnyObject]
+        
+        self.tableView.registerNib(UINib.init(nibName: "AHASegmentCellTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "segmentCell")
+        
         self.tableView.reloadData()
+        
+        self.navigationController?.navigationBarHidden = true
     }
 
     override func didReceiveMemoryWarning() {
@@ -181,6 +200,7 @@ class AHAMeetingViewController: UIViewController, UITableViewDelegate, UITableVi
     //MARK: UITableViewDelegate
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
         return 20
     }
     
@@ -190,9 +210,10 @@ class AHAMeetingViewController: UIViewController, UITableViewDelegate, UITableVi
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let cell : AHASegmentCellTableViewCell = (tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as? AHASegmentCellTableViewCell)!
+        let cell : AHASegmentCellTableViewCell = (tableView.dequeueReusableCellWithIdentifier("segmentCell", forIndexPath: indexPath) as? AHASegmentCellTableViewCell)!
         
-    
+        cell.numberLabel.text =  String(indexPath.row + 1)
+        
         return cell
     }
     
@@ -200,5 +221,9 @@ class AHAMeetingViewController: UIViewController, UITableViewDelegate, UITableVi
         
     }
     
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
+    {
+        return 100.0;//Choose your custom row height
+    }
 }
 
