@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AHAMeetingViewController: UIViewController {
+class AHAMeetingViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     let meetingModel : AHAMeetingModel = AHAMeetingModel()
     var listIsActive : Bool = false
@@ -68,6 +68,7 @@ class AHAMeetingViewController: UIViewController {
 
     @IBAction func menuButtonHandler(sender: AnyObject, forEvent event: UIEvent) {
         self.toggleListView()
+        self.tableView.reloadData()
     }
     
     func toggleListView() {
@@ -167,11 +168,37 @@ class AHAMeetingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        self.tableView.delegate = self
+        self.tableView.registerClass(AHASegmentCellTableViewCell.self, forCellReuseIdentifier: "cell")
+        self.tableView.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    //MARK: UITableViewDelegate
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 20
+    }
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        let cell : AHASegmentCellTableViewCell = (tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as? AHASegmentCellTableViewCell)!
+        
+    
+        return cell
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+    }
+    
 }
 
