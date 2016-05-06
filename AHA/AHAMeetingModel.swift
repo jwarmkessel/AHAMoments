@@ -15,6 +15,10 @@ import UIKit
 // Model Send a uniqueID (folder) to recorder to store recordings
 // Track taps - snippetTap
 
+let kSnippetText = "text"
+let kSnippetDuration = "duration"
+let kSnippetTimeStamp = "timestamp"
+
 class AHAMeetingModel: NSObject {
     
     let recorder : AHARecorder = AHARecorder()
@@ -25,7 +29,7 @@ class AHAMeetingModel: NSObject {
 
     //var meetings = [String]()
 
-    var snippetTimes = [NSNumber]()
+    var snippetTimes = [AnyObject]()
 
     func startMeeting() {
 
@@ -42,7 +46,13 @@ class AHAMeetingModel: NSObject {
 
     func snippetCapture(nowTime: NSNumber) {
 
-        snippetTimes.append(nowTime)
+        let text = ""
+
+        let currentTime = NSDate.timeIntervalSinceReferenceDate()
+
+        let blob : [String:AnyObject] = [kSnippetText : text, kSnippetDuration : nowTime, kSnippetTimeStamp : currentTime]
+
+        snippetTimes.append(blob)
 
         print(snippetTimes)
     }
