@@ -82,18 +82,20 @@ class AHAMeetingViewController: UIViewController {
             self.view.layoutIfNeeded()
         }
     }
+
+    // MARK: Shake Handling
   
-    //TODO fix shake to stop
-    override func motionCancelled(motion: UIEventSubtype, withEvent event: UIEvent?) {
+    override func motionEnded(motion: UIEventSubtype, withEvent event: UIEvent?) {
         
         if (motion == .MotionShake)
         {
             print("shake")
+
+            stopRecording(self)
         
         }
     }
     
-    //TODO fix shake to stop
     override func canBecomeFirstResponder() -> Bool {
         return true
     }
