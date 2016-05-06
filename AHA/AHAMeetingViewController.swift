@@ -9,8 +9,8 @@
 import UIKit
 
 class AHAMeetingViewController: UIViewController {
-
-    let recorder : AHARecorder = AHARecorder()
+    
+    let model : AHAMeetingModel = AHAMeetingModel()
     
     @IBOutlet weak var tableView: UITableView!
     //Used to animate the height of the tableView.

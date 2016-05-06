@@ -9,5 +9,10 @@
 import UIKit
 
 class AHAMeetingModel: NSObject {
-
+    
+    let recorder : AHARecorder = AHARecorder()
+    
+    func startRecording() {
+        //recorder.startRecording(uniqueId : String)
+    }
 }
