@@ -58,7 +58,8 @@ class AHARecorder: NSObject, AVAudioRecorderDelegate {
         }
     }
     
-//    func startRecording() {
+    func startRecording(uniqueID : String) { }
+    
 //        let documentDirectory : String = getDocumentsDirectory()
 //        let audioFilename = documentDirectory.stringByAppendingPathComponent("recording.m4a")
 //        let audioURL = NSURL(fileURLWithPath: audioFilename)

@@ -10,7 +10,7 @@ import UIKit
 
 class AHAMeetingViewController: UIViewController {
 
-    let recorder : AHARecorder = AHARecorder()
+    let meetingModel : AHAMeetingModel = AHAMeetingModel()
     
     @IBOutlet weak var tableView: UITableView!
     //Used to animate the height of the tableView.
@@ -33,11 +33,9 @@ class AHAMeetingViewController: UIViewController {
         print("doubleTap")
         
         self.view.bringSubviewToFront(self.recordingView)
-        
-        // func: Create AHA Recorder Object
-        // subfunc: Create meetings directory
-        // subfunc: Create uniqueID directory for this meeting
-        // Start recording
+    
+
+        meetingModel.startMeeting()
 
     }
     
