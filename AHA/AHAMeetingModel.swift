@@ -25,6 +25,8 @@ class AHAMeetingModel: NSObject {
 
     //var meetings = [String]()
 
+    var snippetTimes = [NSNumber]()
+
     func startMeeting() {
 
         path = createMeetingsDirectory()
@@ -38,15 +40,20 @@ class AHAMeetingModel: NSObject {
         }
     }
 
-    func snippetCapture() {
+    func snippetCapture(nowTime: NSNumber) {
 
-        
+        snippetTimes.append(nowTime)
+    }
 
+    func stopMeeting(nowTime: NSNumber) {
+        recorder.finishRecording(success: true)
     }
 
 // MARK: File Handling
 
     func createMeetingsDirectory() -> String {
+
+        snippetTimes.removeAll()
 
         let paths = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)
         let documentsDirectory: AnyObject = paths[0]

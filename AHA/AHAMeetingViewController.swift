@@ -30,13 +30,12 @@ class AHAMeetingViewController: UIViewController {
     @IBAction func stopRecording(sender: AnyObject) {
         print("stop")
 
-        meetingModel.recorder.finishRecording(success: true)
+        meetingModel.stopMeeting(nowTime)
 
         timerStop(self)
 
         self.view.bringSubviewToFront(self.doubleTapView)
         self.doubleTapView.userInteractionEnabled = true;
-
     }
 
     @IBAction func tapHandler(sender: AnyObject) {
@@ -54,7 +53,7 @@ class AHAMeetingViewController: UIViewController {
     @IBAction func snippetCaptureHandler(sender: AnyObject) {
         print("snippet Cature Tap")
 
-        meetingModel.snippetCapture()
+        meetingModel.snippetCapture(nowTime)
     }
 
     @IBAction func menuButtonHandler(sender: AnyObject, forEvent event: UIEvent) {
@@ -108,6 +107,8 @@ class AHAMeetingViewController: UIViewController {
 
     var timer:NSTimer = NSTimer()
 
+    var nowTime = NSNumber()
+
     @IBAction func timerStart(sender: AnyObject) {
         if (!timer.valid) {
             let aSelector : Selector = "updateTime"
@@ -144,8 +145,11 @@ class AHAMeetingViewController: UIViewController {
         //let strFraction = String(format: "%02d", fraction)
 
         //concatenate minuets, seconds and milliseconds as assign it to the UILabel
-//        displayTimeLabel.text = "\(strMinutes):\(strSeconds):\(strFraction)"
+        //displayTimeLabel.text = "\(strMinutes):\(strSeconds):\(strFraction)"
         displayTimeLabel.text = "\(strMinutes):\(strSeconds)"
+
+        // Keep this to send to model
+        nowTime = NSNumber(double: elapsedTime)
     }
 
     override func viewDidLoad() {
