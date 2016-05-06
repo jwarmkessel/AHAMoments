@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Meeting View Controller-->
@@ -16,11 +17,84 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S5Y-wd-Zky">
+                                <rect key="frame" x="20" y="20" width="560" height="580"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="Qtk-US-2Ao" appends="YES" id="0Zp-mg-Ywf"/>
+                                </connections>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8oQ-2E-xQH">
+                                <rect key="frame" x="20" y="20" width="560" height="580"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="xU4-XU-U2x" appends="YES" id="XK2-tx-apy"/>
+                                </connections>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DAI-MU-PdV">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="55"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="55" id="sb4-84-oTz"/>
+                                </constraints>
+                                <state key="normal" title="Menu">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="menuButtonHandler:forEvent:" destination="BYZ-38-t0r" eventType="touchUpInside" id="rcq-5C-2K2"/>
+                                </connections>
+                            </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="KNb-YU-3Xj">
+                                <rect key="frame" x="0.0" y="55" width="600" height="0.0"/>
+                                <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" id="iXB-95-oNC"/>
+                                </constraints>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="KNb-YU-3Xj" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="4xJ-Ge-Xdg"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="S5Y-wd-Zky" secondAttribute="trailing" id="58Q-CZ-bOh"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="S5Y-wd-Zky" secondAttribute="bottom" id="KGM-nJ-d3e"/>
+                            <constraint firstItem="S5Y-wd-Zky" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="Kx7-U8-mC5"/>
+                            <constraint firstItem="8oQ-2E-xQH" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="MU8-2Z-TYN"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="8oQ-2E-xQH" secondAttribute="trailing" id="QF1-P0-R47"/>
+                            <constraint firstItem="8oQ-2E-xQH" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="ZJb-dn-Rts"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="DAI-MU-PdV" secondAttribute="trailing" constant="-20" id="czJ-pY-BFU"/>
+                            <constraint firstItem="DAI-MU-PdV" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="-20" id="e7m-9C-vOB"/>
+                            <constraint firstItem="KNb-YU-3Xj" firstAttribute="top" secondItem="DAI-MU-PdV" secondAttribute="bottom" id="kuz-FV-fQY"/>
+                            <constraint firstItem="DAI-MU-PdV" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="njB-YW-aTr"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="KNb-YU-3Xj" secondAttribute="trailing" constant="-20" id="uSz-k2-yga"/>
+                            <constraint firstItem="S5Y-wd-Zky" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="vRg-3h-qVY"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="KNb-YU-3Xj" secondAttribute="bottom" constant="545" id="wdN-DR-Fd2"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="8oQ-2E-xQH" secondAttribute="bottom" id="x7l-er-JpH"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="doubleTapView" destination="8oQ-2E-xQH" id="mAl-mE-WM2"/>
+                        <outlet property="menuButton" destination="DAI-MU-PdV" id="cGl-Wz-1VO"/>
+                        <outlet property="recordingView" destination="S5Y-wd-Zky" id="b5I-1V-AwG"/>
+                        <outlet property="tableViewBottomLayoutConstraint" destination="wdN-DR-Fd2" id="KLr-TS-Q8A"/>
+                        <outlet property="tableViewHeightConstraint" destination="iXB-95-oNC" id="wZI-T4-hFU"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer numberOfTapsRequired="2" id="xU4-XU-U2x" userLabel="2 Tap Gesture Recognizer">
+                    <connections>
+                        <action selector="tapHandler:" destination="BYZ-38-t0r" id="WUm-RH-zNJ"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="Qtk-US-2Ao" userLabel="1 Tap Gesture Recognizer">
+                    <connections>
+                        <action selector="snippetCaptureHandler:" destination="BYZ-38-t0r" id="uFr-4g-jWt"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
+            <point key="canvasLocation" x="244" y="387"/>
         </scene>
     </scenes>
 </document>
