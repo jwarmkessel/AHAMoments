@@ -128,12 +128,12 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yf7-Fe-8Bz">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JxE-Mg-USi">
-                                                <rect key="frame" x="0.0" y="21" width="600" height="55"/>
+                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JxE-Mg-USi">
+                                                <rect key="frame" x="265" y="13" width="70" height="70"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="55" id="pC1-yc-szm"/>
                                                 </constraints>
-                                                <state key="normal" title="Menu">
+                                                <state key="normal" image="C_0">
                                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
                                                 <connections>
@@ -282,4 +282,7 @@
             <point key="canvasLocation" x="244" y="387"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="C_0" width="70" height="70"/>
+    </resources>
 </document>

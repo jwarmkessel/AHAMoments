@@ -52,6 +52,8 @@ class AHAMeetingViewController: UIViewController, UITableViewDelegate, UITableVi
         self.view.bringSubviewToFront(self.doubleTapView)
         self.doubleTapView.userInteractionEnabled = true;
 
+        doButtonCircularAnimation()
+
         UIView.animateWithDuration(0.8) { () -> Void in
 
             self.displayTimeLabel.alpha = 0.2;
@@ -72,6 +74,57 @@ class AHAMeetingViewController: UIViewController, UITableViewDelegate, UITableVi
         meetingModel.startMeeting()
 
         timerStart(self)
+    }
+
+    func doButtonCircularAnimation() {
+
+        menuButton.imageView?.image = UIImage.init(named: "B_0")
+
+        let animationView = menuButton.imageView
+
+        var animations = [UIImage]()
+        var pngName : String
+
+        for i in 0 ... 29 {
+
+            pngName = "A_\(i)"
+            animations.append(UIImage.init(named: pngName)!)
+
+        }
+
+        let animationDuration : NSTimeInterval = 0.5
+
+        animationView?.animationImages = animations
+        animationView?.animationDuration = animationDuration
+        animationView?.animationRepeatCount = 3;
+
+        menuButton.imageView?.startAnimating()
+
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (Int64)(1 * NSEC_PER_SEC)), dispatch_get_main_queue()) { () -> Void in
+            self.doButtonBarOutAnimation()
+        }
+    }
+
+    func doButtonBarOutAnimation() {
+        let animationView = menuButton.imageView
+
+        var animations = [UIImage]()
+        var pngName : String
+
+        for i in 0 ... 15 {
+
+            pngName = "B_\(i)"
+            animations.append(UIImage.init(named: pngName)!)
+
+        }
+
+        let animationDuration : NSTimeInterval = 0.75
+
+        animationView?.animationImages = animations
+        animationView?.animationDuration = animationDuration
+        animationView?.animationRepeatCount = 1;
+        
+        menuButton.imageView?.startAnimating()
     }
     
     @IBAction func snippetCaptureHandler(sender: AnyObject) {
