@@ -7,13 +7,15 @@
 //
 
 import UIKit
-import AudioToolbox
+import MediaPlayer
 
 class AHAMeetingViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     let meetingModel : AHAMeetingModel = AHAMeetingModel()
     var listIsActive : Bool = false
 
+    var player : AVAudioPlayer?
+    
     @IBOutlet weak var tableView: UITableView!
     
     //Used to animate the height of the tableView.
@@ -530,6 +532,15 @@ class AHAMeetingViewController: UIViewController, UITableViewDelegate, UITableVi
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
 
+        if (self.player?.playing == true)
+        {
+            self.player?.stop()
+        }
+        else
+        {
+            //Do nothing here
+        }
+        
         let soundFile = meetingModel.snippetTimes[indexPath.row][kSnippetSoundFile] as! String
 
         print("didSelectRowAtIndexPath row:\(indexPath.row) :: soundFile = \(soundFile)")
@@ -563,14 +574,19 @@ class AHAMeetingViewController: UIViewController, UITableViewDelegate, UITableVi
 
     func playSnippet(soundFile: String) {
 
-        AudioServicesDisposeSystemSoundID(mySound)
-
-        let soundURL = NSURL.init(fileURLWithPath: soundFile)
-
-        AudioServicesCreateSystemSoundID(soundURL, &mySound)
-        // Play
-        AudioServicesPlaySystemSound(mySound);
-
+        do
+        {
+            if let url : NSURL = NSURL.init(string: soundFile)
+            {
+                try self.player = AVAudioPlayer(contentsOfURL: url)
+            }
+        }
+        catch
+        {
+            
+        }
+        
+        self.player?.play()
     }
 }
 

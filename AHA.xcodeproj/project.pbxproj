@@ -30,6 +30,7 @@
 		7BB91DAD1CDC297000B9EF08 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7BB91DB31CDC36AF00B9EF08 /* AHARecorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHARecorder.swift; sourceTree = "<group>"; };
 		7BB91DB51CDC3B8D00B9EF08 /* AHAMeetingModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHAMeetingModel.swift; sourceTree = "<group>"; };
+		7BD387731CF3DAE500361BBB /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,6 +47,7 @@
 		7BB91D951CDC297000B9EF08 = {
 			isa = PBXGroup;
 			children = (
+				7BD387731CF3DAE500361BBB /* AudioToolbox.framework */,
 				7BB91DA01CDC297000B9EF08 /* AHA */,
 				7BB91D9F1CDC297000B9EF08 /* Products */,
 			);
@@ -108,7 +110,7 @@
 				TargetAttributes = {
 					7BB91D9D1CDC297000B9EF08 = {
 						CreatedOnToolsVersion = 7.2.1;
-						DevelopmentTeam = 222587KQHJ;
+						DevelopmentTeam = 9J6N543K6L;
 					};
 				};
 			};

@@ -41,11 +41,11 @@ class AHARecorder: NSObject, AVAudioRecorderDelegate {
     func startRecording(urlString : String) {
     
         let documents: AnyObject = NSSearchPathForDirectoriesInDomains( NSSearchPathDirectory.DocumentDirectory,  NSSearchPathDomainMask.UserDomainMask, true)[0]
-        let str =  documents.stringByAppendingPathComponent("recordTest.mp4")
+        let str =  documents.stringByAppendingPathComponent("recordTest.caf")
         var url = NSURL.fileURLWithPath(str as String)
         
         url = NSURL.fileURLWithPath(urlString as String)
-        url = url.URLByAppendingPathComponent("recordTest.mp4")
+        url = url.URLByAppendingPathComponent("recordTest.caf")
         
         self.directoryName = url.path
         
